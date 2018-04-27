@@ -99,7 +99,9 @@ do_stop()
 
   # Disable Thrift, Mark node down for client
   echo "executing nodetool disablethrift .."
-  $NODETOOL -h <%=node['ipaddress']%> disablethrift
+  # TW: This has issues atm, requires jmx local set false but that has it's own issue.
+  #$NODETOOL -h <%=node['ipaddress']%> disablethrift
+  $NODETOOL disablethrift
   [ $? -eq 0 ] || {
     echo "failed to execute disablethrift .."
   }
@@ -107,7 +109,9 @@ do_stop()
 
   # Disabling Gossip, Mark node down for cluster
   echo "executing nodetool disablegossip .."
-  $NODETOOL -h <%=node['ipaddress']%> disablegossip
+  # TW: This has issues atm, requires jmx local set false but that has it's own issue.
+  #$NODETOOL -h <%=node['ipaddress']%> disablegossip
+  $NODETOOL disablegossip
   [ $? -eq 0 ] || {
     echo "failed to execute disablegossip .."
   }
@@ -115,7 +119,9 @@ do_stop()
 
   # Drain node for existing connections, Always safe even takes long time
   echo "executing nodetool drain .."
-  $NODETOOL -h <%=node['ipaddress']%> drain
+  # TW: This has issues atm, requires jmx local set false but that has it's own issue.
+  #$NODETOOL -h <%=node['ipaddress']%> drain
+  $NODETOOL drain
   [ $? -eq 0 ] || {
     echo "failed to execute drain .."
   }
